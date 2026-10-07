@@ -7,3 +7,6 @@ print(a / b)
 
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> 999ff94 (new operation delenie)
