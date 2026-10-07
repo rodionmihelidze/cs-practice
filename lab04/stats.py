@@ -1,8 +1,13 @@
 def parse_record(line: str) -> dict:
-    city, temp_raw, date = fields
-    fields = line.split(";")
+    fields = line.split(";")                 
     if len(fields) != 3:
-        raise ValueError("чего то не хватает")
+        raise ValueError(f"ожидалось 3 поля, получено {len(fields)}: {line!r}")
+
+    city, temp_raw, date = fields
+    city = city.strip()
+    temp_raw = temp_raw.strip()
+    date = date.strip()
+
     if not city or not date:
         raise ValueError(f"пустой город или дата: {line!r}")
 
@@ -25,6 +30,7 @@ def read_valid(lines: list[str]) -> list[dict]:
             continue
     return records
 
+
 def count_errors(lines: list[str]) -> int:
     errors = 0
     for line in lines:
@@ -36,6 +42,7 @@ def count_errors(lines: list[str]) -> int:
             errors += 1
     return errors
 
+
 def average_by_city(records: list[dict]) -> dict:
     total = {}
     count = {}
@@ -43,7 +50,8 @@ def average_by_city(records: list[dict]) -> dict:
         city = record["city"]
         total[city] = total.get(city, 0.0) + record["temperature"]
         count[city] = count.get(city, 0) + 1
-    return {city: round(total[city] / count[city], 1) for city in total}    
+    return {city: round(total[city] / count[city], 1) for city in total}
+
 
 def warmest_city(records: list[dict]) -> str:
     averages = average_by_city(records)
