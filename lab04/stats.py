@@ -1,11 +1,12 @@
 def parse_record(line: str) -> dict:
-    fields = line.split(";")                 
+    fields = line.split(";")
+
     if len(fields) != 3:
         raise ValueError(f"ожидалось 3 поля, получено {len(fields)}: {line!r}")
 
     city, temp_raw, date = fields
     city = city.strip()
-    temp_raw = temp_raw.strip()
+    temp_raw = temp_raw.strip().replace(",", ".")
     date = date.strip()
 
     if not city or not date:
