@@ -25,6 +25,15 @@ def read_valid(lines: list[str]) -> list[dict]:
             continue
     return records
 
-
+def count_errors(lines: list[str]) -> int:
+    errors = 0
+    for line in lines:
+        if line.strip() == "":
+            continue
+        try:
+            parse_record(line)
+        except ValueError:
+            errors += 1
+    return errors
 
     
