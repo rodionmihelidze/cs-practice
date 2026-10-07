@@ -36,4 +36,11 @@ def count_errors(lines: list[str]) -> int:
             errors += 1
     return errors
 
-    
+def average_by_city(records: list[dict]) -> dict:
+    total = {}
+    count = {}
+    for record in records:
+        city = record["city"]
+        total[city] = total.get(city, 0.0) + record["temperature"]
+        count[city] = count.get(city, 0) + 1
+    return {city: round(total[city] / count[city], 1) for city in total}    
