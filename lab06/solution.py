@@ -12,10 +12,6 @@ def count_by_extension(paths):
         r[p] = r.get(p, 0) + 1
     return r
 
-for i in paths:
-    n = i.split("/")[-1]
-    d = n.rsplit(".", 1)
-    print(d)
 def deepest_path(paths):
     b = []
     m = []
