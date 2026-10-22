@@ -3,16 +3,19 @@ from math import floor
 def count_by_extension(paths):
     r = {}
     for i in paths:
-        d = i.split('.' , 1)[-1]
-        if len(d) != 2:
-          r[""] = r.get("", 0) + 1
-        else:
-           if d[1] == 'PDF':
-              r['pdf'] = r.get('pdf', 0) + 1
-           else:
-            r[f"{d[1]}"] = r.get(f"{d[1]}", 0) + 1
+      n = i.split("/")[-1]
+      d = n.rsplit('.', 1)
+      if len(d) != 2:
+        r[""] = r.get("", 0) + 1
+      else:
+        p = d[1].lower()
+        r[p] = r.get(p, 0) + 1
     return r
 
+for i in paths:
+    n = i.split("/")[-1]
+    d = n.rsplit(".", 1)
+    print(d)
 def deepest_path(paths):
     b = []
     m = []
