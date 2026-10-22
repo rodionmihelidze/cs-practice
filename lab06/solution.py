@@ -1,31 +1,45 @@
-# paths = ["docs/report.PDF", "notes.txt", "docs/img/logo.png", "Makefile"]
+from math import floor
+
 def count_by_extension(paths):
-    r = {"pdf" : 0}
+    r = {}
     for i in paths:
-        d = i.split('.')
+        d = i.split('.' , 1)[-1]
         if len(d) != 2:
-          r[""] = 0
-          r[""] += 1
+          r[""] = r.get("", 0) + 1
         else:
            if d[1] == 'PDF':
-              r['pdf'] += 1
+              r['pdf'] = r.get('pdf', 0) + 1
            else:
-            r[f"{d[1]}"] = 0
-            r[f"{d[1]}"] += 1
+            r[f"{d[1]}"] = r.get(f"{d[1]}", 0) + 1
     return r
 
 def deepest_path(paths):
     b = []
     m = []
+    s = ''
     for i in paths:
       m.append(i.split("/"))
     for j in range(len(m) - 1):
-      if len(m[j]) > len(m[j + 1]):
+      if len(m[j]) >= len(m[j + 1]):
         b.append(j)
       else:
         b.append(j + 1)
-    return paths[max(b)]
+    if len(b) > 0:
+      s += f'{paths[max(b)]}'
+    else:
+      s = ''
+    return s
 
+def human_size(x):
+  bites = ["Б", "КБ", "МБ", "ГБ", "ТБ"]
+  size = x
+  i = 0
+  while size >= 1024 and i < 4:
+    size = size / 1024
+    i += 1
+  if i == 0:
+    return f"{size:.0f} {bites[i]}"
+  return f"{size:.1f} {bites[i]}"
 
 
    
