@@ -1,4 +1,4 @@
-paths = ["docs/report.PDF", "notes.txt", "docs/img/logo.png", "Makefile"]
+# paths = ["docs/report.PDF", "notes.txt", "docs/img/logo.png", "Makefile"]
 def count_by_extension(paths):
     r = {"pdf" : 0}
     for i in paths:
@@ -14,7 +14,6 @@ def count_by_extension(paths):
             r[f"{d[1]}"] += 1
     return r
 
-
 def deepest_path(paths):
     b = []
     m = []
@@ -27,6 +26,7 @@ def deepest_path(paths):
         b.append(j + 1)
     return paths[max(b)]
 
-def human_size(x):
+
+
    
   
