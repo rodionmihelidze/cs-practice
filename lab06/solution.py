@@ -8,8 +8,11 @@ def count_by_extension(paths):
       if len(d) != 2:
         r[""] = r.get("", 0) + 1
       else:
-        p = d[1].lower()
-        r[p] = r.get(p, 0) + 1
+        if d[0] == "":
+          r[""] = r.get("", 0) + 1
+        else:
+          p = d[1].lower()
+          r[p] = r.get(p, 0) + 1
     return r
 
 def deepest_path(paths):
