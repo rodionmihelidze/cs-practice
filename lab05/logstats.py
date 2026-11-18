@@ -1,28 +1,8 @@
-from pstats import SortKey
-
-
-line = ' 2026-03-01T09:03:55 ERROR Не удалось открыть файл data.csv'
-
-def parse_event(line):  
-    b = line.split(maxsplit=2)
-    level = ['DEBUG', 'INFO', 'WARNING', 'ERROR']
-    print(b)
-    print(len(b))
-    k = {"time": '',
-        "level": '',
-        "message": ''}
-    if len(b) == 2 or b[1] not in level:
-        return ValueError
-    else:
-        k['level'] = b[1]
-        k['time'] = b[0]
-        k['message'] = b[2]
-    return k
-
 LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR"]
 
 
 def parse_event(line):
+    line = line.strip()
     parts = line.split(maxsplit=2)
     if len(parts) < 3:
         raise ValueError("слишком мало частей в строке")
@@ -68,12 +48,16 @@ def top_errors(lines, n):
             messages[msg] = messages[msg] + 1
         else:
             messages[msg] = 1
+
     pairs = []
     for msg in messages:
         pairs.append([msg, messages[msg]])
-        return (-pairs[1], pairs[0])
 
-    pairs.sort(key=SortKey)
+    def sort_key(pair):
+        return (-pair[1], pair[0])
+
+    pairs.sort(key=sort_key)
+
     result = []
     for i in range(len(pairs)):
         if i >= n:
@@ -84,10 +68,12 @@ def top_errors(lines, n):
 
 def format_report(counts, errors):
     text = "Отчёт по журналу\n\n"
+
     keys = []
     for key in counts:
         keys.append(key)
     keys.sort()
+
     for key in keys:
         text = text + key + ": " + str(counts[key]) + "\n"
 

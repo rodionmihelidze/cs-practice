@@ -1,7 +1,9 @@
 import logstats
 
+
 def main():
     path = input().strip()
+
     with open(path, encoding="utf-8") as log:
         counts = logstats.count_levels(log)
 
@@ -22,6 +24,7 @@ def main():
     report = logstats.format_report(counts, errors)
     with open("report.txt", "w", encoding="utf-8") as out:
         out.write(report)
+
 
 if __name__ == "__main__":
     main()
