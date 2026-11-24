@@ -1,0 +1,23 @@
+import numpy as np
+def make_hours():
+    hours = np.arange(0, 22, 3)
+    return hours.tolist()
+
+def vector_report(values):
+    arr = np.asarray(values, dtype=float)
+    report = {
+        "third": float(arr[2]),
+        "last": float(arr[-1]),
+        "middle": arr[2:6].tolist(),
+        "every_second": arr[::2].tolist(),
+        "reversed": arr[::-1].tolist()
+    }
+    return report
+
+
+def change_vector(values):
+    arr = np.asarray(values, dtype=float).copy()
+    arr[2:5] = 99
+    arr[::2] = -1
+    return arr.tolist()
+
