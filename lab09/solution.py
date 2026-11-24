@@ -21,13 +21,13 @@ def change_vector(values):
     arr[::2] = -1
     return arr.tolist()
 
-def cap_above(values: list[float], limit: float) -> list[float]:
+def cap_above(values, limit):
     arr = np.asarray(values, dtype=float).copy()
     arr[arr > limit] = limit
     return arr.tolist()
 
 
-def celsius_to_fahrenheit(values: list[float]) -> list[float]:
+def celsius_to_fahrenheit(values):
     arr = np.asarray(values, dtype=float)
     fahrenheit = arr * 9 / 5 + 32
     return fahrenheit.tolist()
