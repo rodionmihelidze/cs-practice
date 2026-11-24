@@ -17,3 +17,20 @@ print(hours[-1])
 print(hours[2:6])
 print(hours[::2])
 print(hours[::-1])
+
+#3
+temperatures = np.array([
+    [12, 14, 13, 15],
+    [11, 13, 16, 17],
+    [10, 12, 15, 18]
+])
+print(temperatures.shape)
+print(temperatures.ndim)
+print(temperatures.size)
+print(temperatures[1, 2])
+print(temperatures[0])
+print(temperatures[:, -1])
+print(temperatures[:2, 1:])
+print(temperatures[:2, 1:3])
+
+#4
